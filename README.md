@@ -16,6 +16,25 @@ Qelp helps people explore different forms of movement, keep personal wellness re
 
 The goal of the project is not the app itself. It is a MongoDB database that supports these features while showing core database design ideas: document modeling, embedding versus referencing, indexing, query optimization, schema validation and backend integration.
 
+## Database seeding
+
+The project includes a TypeScript seed script (`backend/scripts/seed.ts`) that populates MongoDB with realistic demo data for testing and development. It creates four demo users, topics, activities, activity lists, journal entries, discussions, replies, resources, bookmarks and reports across all 10 collections. The script uses Mongoose models to validate and insert documents, bcrypt to hash demo passwords, and MongoDB-generated ObjectIds to maintain references between related documents. It also synchronizes collection indexes before inserting the data.
+
+To run the seed script from the project root:
+
+```bash
+cd backend
+npx tsx scripts/seed.ts
+```
+
+All demo users share the password `password123`. The script reads `MONGODB_URI` and optionally `SEED_DB_NAME` from `.env`.
+
+**Warning:** Running the script drops the entire selected database before inserting fresh data. Use only a dedicated development or test database. To clear the database without inserting demo data:
+
+```bash
+npx tsx scripts/seed.ts --clear
+```
+
 ## Status
 
 | Part | State |
